@@ -92,14 +92,23 @@ const Welcome = () => {
     const labels = jsonData.map(item => item.status);  // X-axis labels
     const dataValues = jsonData.map(item => item.count);  // Y-axis values
 
+    // Generate different colors for each bar
+    const backgroundColors = jsonData.map(() => {
+      // Generate random color
+      return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.6)`;
+    });
+
+    const borderColors = backgroundColors.map(color => {
+      return color.replace('0.6', '1');  // Set the border color to fully opaque
+    });
+
     const newDataset = {
       label: 'Package Count',  // Y-axis label
       data: dataValues,  // Y-axis data
-      backgroundColor: 'rgba(75, 192, 192, 0.6)',  // Bar color
-      borderColor: 'rgba(75, 192, 192, 1)',  // Border color
-      borderWidth: 2,  // Border width
+      backgroundColor: backgroundColors,  // Dynamic background colors
+      borderColor: borderColors,  // Dynamic border colors
+      borderWidth: 1,  // Border width
     };
-
     // Set the dynamic data to the state
     setChartData({
       labels,  // X-axis
