@@ -1,7 +1,7 @@
+import React from 'react';
 import { Button, Col, Form, Row, Table, FormFeedback } from 'react-bootstrap';
 import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 
 const Items = (props) => {
   let items = props.items || [];
@@ -12,6 +12,7 @@ const Items = (props) => {
   let totPrice = 0;
 
   return (
+    <>
     <fieldset className='bg-light'>
       <legend className='alert alert-primary px-2 py-1'> Item Details </legend>
       <Row>
@@ -79,7 +80,7 @@ const Items = (props) => {
                           required
                         />
                         {errors && errors[index]['item_name'] && (
-                          <FormFeedback type="invalid">{errors[index]['item_name']}</FormFeedback>
+                          <Form.Control.Feedback type="invalid">{errors[index]['item_name']}</Form.Control.Feedback>
                         )}
                       </td>
                       <td>
@@ -97,7 +98,7 @@ const Items = (props) => {
                           type='number'
                         />
                         {errors && errors[index]['height'] && (
-                          <FormFeedback type="invalid">{errors[index]['height']}</FormFeedback>
+                          <Form.Control.Feedback type="invalid">{errors[index]['height']}</Form.Control.Feedback>
                         )}
                       </td>
                       <td>
@@ -115,7 +116,7 @@ const Items = (props) => {
                           type='number'
                         />
                         {errors && errors[index]['weight'] && (
-                          <FormFeedback type="invalid">{errors[index]['weight']}</FormFeedback>
+                          <Form.Control.Feedback type="invalid">{errors[index]['weight']}</Form.Control.Feedback>
                         )}
                       </td>
                       <td>
@@ -133,7 +134,7 @@ const Items = (props) => {
                           type='number'
                         />
                         {errors && errors[index]['width'] && (
-                          <FormFeedback type="invalid">{errors[index]['width']}</FormFeedback>
+                          <Form.Control.Feedback type="invalid">{errors[index]['width']}</Form.Control.Feedback>
                         )}
                       </td>
                       <td>
@@ -151,7 +152,7 @@ const Items = (props) => {
                           type='number'
                         />
                         {errors && errors[index]['price'] && (
-                          <FormFeedback type="invalid">{errors[index]['price']}</FormFeedback>
+                          <Form.Control.Feedback type="invalid">{errors[index]['price']}</Form.Control.Feedback>
                         )}
                       </td>
                       <td className='text-center'>
@@ -168,6 +169,7 @@ const Items = (props) => {
         </Col>
       </Row>
     </fieldset>
+    </>
   );
 };
 

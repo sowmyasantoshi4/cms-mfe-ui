@@ -33,7 +33,7 @@ const Header = () => {
               ? 
               // Login User Menu
               <>
-                <Nav.Link href="/welcome"> <FontAwesomeIcon icon={faList} /> Dashboard</Nav.Link>
+                <Nav.Link href="/dashboard"> <FontAwesomeIcon icon={faList} /> Dashboard</Nav.Link>
                 <NavDropdown title="Admin Portal" id="basic-nav-dropdown-admin">
                   <NavDropdown.Item href="/addStaff"><FontAwesomeIcon icon={faPersonCirclePlus} /> Add Staff</NavDropdown.Item>
                   <NavDropdown.Item href="/addBranch"><FontAwesomeIcon icon={faPlusCircle} /> Add Branch</NavDropdown.Item>

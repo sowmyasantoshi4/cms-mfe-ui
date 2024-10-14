@@ -3,7 +3,7 @@ import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
-import { getLocalStorageOrDefault } from '../components/utils/ValidationUtils';
+import { getLocalStorageOrDefault } from '../utils/ValidationUtils';
 
 const PackageStatus = (props) => {
   const [sd, setSd] = useState(props.statusData);
@@ -39,7 +39,7 @@ const PackageStatus = (props) => {
       <legend className='alert alert-primary px-2 py-1'>Status Updates</legend>
       <Row>
         <Col xs={11} md={11}>
-          <ListGroup>
+        <ListGroup>
             {sd.map((key, index) => {
               let updatedOn = key.statusUpdatedOn;
               let fontCss = updatedOn ? "text-success" : 'text-warning';

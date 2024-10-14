@@ -53,7 +53,7 @@ const FilterComponent = ({ filterText, onFilter, onClear, isDisabled }) => (
             onChange={onFilter}
             disabled={isDisabled}
           />
-          <Button variant="outline-secondary" onClick={onClear} disabled={isDisabled}>
+          <Button variant="secondary" onClick={onClear} disabled={isDisabled}>
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </InputGroup>

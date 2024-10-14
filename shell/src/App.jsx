@@ -6,9 +6,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../src/globalState/store'; // Import both store and persistor
 
 import Dashboard from "./components/Dashboard";
-import Welcome from "./Components/Welcome";
-import NotFound from "./Components/NotFound";
-import Home from "./Components/Home";
+import Welcome from "./components/Welcome";
+import NotFound from "./components/NotFound";
+import Home from "./components/Home";
 
 import "./index.css";
 import Loader from "./components/Loader";
@@ -25,6 +25,10 @@ const GlobalReport = React.lazy(() => import('reportsMFE/GlobalReport'));
 const AddBranch = React.lazy(() => import('adminMFE/AddBranch'));
 const AddStaff = React.lazy(() => import('adminMFE/AddStaff'));
 
+const AddPackage = React.lazy(() => import('packagesMFE/AddPackage'));
+const UpdatePackage = React.lazy(() => import('packagesMFE/UpdatePackage'));
+
+
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -39,7 +43,7 @@ const App = () => {
               <Suspense fallback={<Loader />}>
                   <Routes>
                     <Route path="/" element={<Home loading={loading} setLoading={setLoading}/>}/>
-                    <Route  path="/dashoboard" element={<Dashboard />}/>
+                    <Route  path="/dashboard" element={<Dashboard />}/>
                     <Route  path="/welcome/*" element={<Welcome />}/>
                     <Route  path="/home" element={<Home />}/>
                     <Route  path="/login" element={<Login />}/>
@@ -48,7 +52,8 @@ const App = () => {
                     <Route  path="/globalReport" element={<GlobalReport />}/>
                     <Route  path="/addBranch" element={<AddBranch />}/>
                     <Route  path="/addStaff" element={<AddStaff />}/>
-
+                    <Route path="/addPackage" element={<AddPackage />}/>
+                    <Route path="/updatePackage" element={<UpdatePackage />}/>
                     
                     <Route path="*" element={<NotFound />}/>
                   </Routes>

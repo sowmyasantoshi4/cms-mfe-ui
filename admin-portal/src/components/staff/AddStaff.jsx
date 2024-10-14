@@ -266,7 +266,7 @@ export const AddStaff = (props) => {
                 </Row>
                 
                 <fieldset className='bg-light p-3'>
-                  <legend className='alert alert-info px-2 py-1'>Address</legend>
+                  <legend className='alert alert-primary px-2 py-1'>Address</legend>
                   <Row className='mb-2'>
                     <Col md={4}>
                       <FloatingLabel controlId="houseNo" label="House No.">

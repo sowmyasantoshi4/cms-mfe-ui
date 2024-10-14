@@ -242,6 +242,10 @@ a:hover{
 
 .bg-info{
     color: #fff;
+    background-color: #3399ff !important;
+}
+.btn-info{
+    background-color: #3399ff !important;
 }
 
 .bg-light{

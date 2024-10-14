@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const BranchStaff = (props) => {
   return (
     <fieldset className="bg-light">
-      <legend className="alert alert-info px-2 py-1">Staff</legend>
+      <legend className="alert alert-primary px-2 py-1">Staff</legend>
       <Row>
         <Col md={12} className="addStaffTableDiv tableFixHead">
           <Table hover>

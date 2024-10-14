@@ -1,13 +1,13 @@
-import { Alert, Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Container, Form, Row, Spinner, FloatingLabel, FormSelect, FormControl } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import Items from './Items';
 import PackageStatus from './PackageStatus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faPencilAlt, faRedo, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import { getPackageDetails, postPackageUpdate } from '../components/restApis/ApiPackage';
+import { getPackageDetails, postPackageUpdate } from '../restApis/ApiPackage';
 import { getLocalStorageOrDefault } from '../utils/ValidationUtils';
-import { loadStatus } from '../components/restApis/ApiOptions';
+import { loadStatus } from '../restApis/ApiOptions';
 
 const ViewPackageDetails = (props) => {
     let allowUpdate = props.allowUpdate || false;
@@ -331,7 +331,11 @@ const ViewPackageDetails = (props) => {
                                                       required
                                                       aria-label="Default select example"
                                                   >
-                                                      {stList}
+                                                    {stList.map((option, index) => (
+                                                        <option key={index} value={option.value}>
+                                                            {option.label}
+                                                        </option>
+                                                    ))}
                                                   </FormSelect>
                                                   {errors.status_id && (
                                                       <Form.Control.Feedback type="invalid">
@@ -352,7 +356,12 @@ const ViewPackageDetails = (props) => {
                                                           required
                                                           aria-label="Default select example"
                                                       >
-                                                          {staffList}
+                                                        {staffList.map((option, index) => (
+                                                            <option key={index} value={option.value}>
+                                                                {option.label}
+                                                            </option>
+                                                        ))}
+                                                          {/* {staffList} */}
                                                       </FormSelect>
                                                       {errors.r_staff_member && (
                                                           <Form.Control.Feedback type="invalid">
@@ -481,7 +490,7 @@ const ViewPackageDetails = (props) => {
                           </Row>
                       </>
                   )}
-              </Card.Body>
+                </Card.Body>
                 )}
               </Card>
             </Col>

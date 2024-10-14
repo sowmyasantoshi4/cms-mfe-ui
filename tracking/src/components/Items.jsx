@@ -13,7 +13,7 @@ const Items = (props) => {
 
   return (
     <fieldset className='bg-light'>
-      <legend className='alert alert-info px-2 py-1'> Item Details </legend>
+      <legend className='alert alert-primary px-2 py-1'> Item Details </legend>
       <Row>
         <Col md={12}>
           <Table hover>

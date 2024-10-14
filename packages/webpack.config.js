@@ -9,7 +9,7 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:9000/",
+    publicPath: "http://localhost:9006/",
   },
 
   resolve: {
@@ -17,7 +17,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 9000,
+    port: 9006,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {
@@ -47,14 +47,6 @@ module.exports = (_, argv) => ({
         },
       },
       {
-        test: /\.scss$/,
-        use: [
-          'style-loader',    // Injects styles into DOM
-          'css-loader',      // Translates CSS into CommonJS
-          'sass-loader'      // Compiles Sass to CSS
-        ]
-      },
-      {
         test: /\.(css|s[ac]ss)$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
@@ -70,19 +62,12 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "shell",
+      name: "packages",
       filename: "remoteEntry.js",
-      remotes: {
-        // sharedMFE : 'shared@http://localhost:9001/remoteEntry.js',
-        loginMFE : 'login@http://localhost:9002/remoteEntry.js',
-        trackingMFE : 'tracking@http://localhost:9003/remoteEntry.js',
-        reportsMFE : 'reports@http://localhost:9004/remoteEntry.js',
-        adminMFE : 'admin_portal@http://localhost:9005/remoteEntry.js',
-        packagesMFE : 'packages@http://localhost:9006/remoteEntry.js',
-      },
+      remotes: {},
       exposes: {
-        // Share the global state provider 
-        './store': './src/globalState/store',  // Expose the Redux store to other MFEs
+        './AddPackage': './src/components/AddPackage',
+        './UpdatePackage': './src/components/UpdatePackage'
       },
       shared: {
         ...deps,
@@ -94,13 +79,6 @@ module.exports = (_, argv) => ({
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
-        '@reduxjs/toolkit': { singleton: true, requiredVersion: deps["@reduxjs/toolkit"] },
-        'react-redux': { singleton: true, requiredVersion: deps["react-redux"] },
-        // // Share the global state provider and hook
-        // 'shared-components': {
-        //   singleton: true,
-        //   requiredVersion: 'auto', // Adjust based on your package version
-        // },
       },
     }),
     new HtmlWebPackPlugin({

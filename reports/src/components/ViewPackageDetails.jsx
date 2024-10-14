@@ -302,7 +302,7 @@ const ViewPackageDetails = (props) => {
                                 </Col>
                                 <Col md={6} xs={12}>
                                     <fieldset className="bg-light">
-                                        <legend className="alert alert-info px-2 py-1">Branch Details</legend>
+                                        <legend className="alert alert-primary px-2 py-1">Branch Details</legend>
                                         <Row>
                                             <Col>
                                                 <Form.Label>From Branch</Form.Label>
@@ -407,7 +407,7 @@ const ViewPackageDetails = (props) => {
                                     <Row className="mt-2">
                                         <Col md={6}>
                                             <fieldset className="bg-light">
-                                                <legend className="alert alert-info px-2 py-1">Sender Details</legend>
+                                                <legend className="alert alert-primary px-2 py-1">Sender Details</legend>
                                                 <Row>
                                                     <Col>
                                                         <Form.Label>Name</Form.Label>
@@ -441,7 +441,7 @@ const ViewPackageDetails = (props) => {
                                         </Col>
                                         <Col md={6}>
                                             <fieldset className="bg-light">
-                                                <legend className="alert alert-info px-2 py-1">Receiver Details</legend>
+                                                <legend className="alert alert-primary px-2 py-1">Receiver Details</legend>
                                                 <Row>
                                                     <Col>
                                                         <Form.Label>Name</Form.Label>
