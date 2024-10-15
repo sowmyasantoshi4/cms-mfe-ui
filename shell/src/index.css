@@ -248,6 +248,10 @@ a:hover{
     background-color: #3399ff !important;
 }
 
+.nav-link{
+    padding-left: 2rem !important;
+}
+
 .bg-light{
     background-color: #f7f7f8 !important;
 }

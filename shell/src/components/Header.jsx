@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faCirclePlus, faEdit, faList, faListNumeric, faListSquares, faPersonCirclePlus, faPlusCircle, faPowerOff, faTruck } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faCirclePlus, faEdit, faList, faListNumeric, faKey, faPersonCirclePlus, faPlusCircle, faPowerOff, faTruck, faUserShield, faChartBar, faBoxOpen, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,6 +16,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const doLogout = () => {
+    localStorage.removeItem('expiryTime');
+    localStorage.removeItem('userProfile');
     dispatch(logout());  // Dispatch the logout action
     // navigate('/login');
   }
@@ -34,15 +36,17 @@ const Header = () => {
               // Login User Menu
               <>
                 <Nav.Link href="/dashboard"> <FontAwesomeIcon icon={faList} /> Dashboard</Nav.Link>
-                <NavDropdown title="Admin Portal" id="basic-nav-dropdown-admin">
+                <NavDropdown title={<span><FontAwesomeIcon icon={faUserShield} /> Admin Portal</span>} id="basic-nav-dropdown-admin">
                   <NavDropdown.Item href="/addStaff"><FontAwesomeIcon icon={faPersonCirclePlus} /> Add Staff</NavDropdown.Item>
                   <NavDropdown.Item href="/addBranch"><FontAwesomeIcon icon={faPlusCircle} /> Add Branch</NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown title="Package Management" id="basic-nav-dropdown-package">
+                <NavDropdown title={<span><FontAwesomeIcon icon={faBoxOpen} /> Package Management</span>} id="basic-nav-dropdown-package">
                   <NavDropdown.Item href="/addPackage"><FontAwesomeIcon icon={faCirclePlus} /> Add New Package</NavDropdown.Item>
                   <NavDropdown.Item href="/updatePackage"><FontAwesomeIcon icon={faEdit} /> Update Package Status</NavDropdown.Item>
+                  <NavDropdown.Item href="/tracking"><FontAwesomeIcon icon={faSearch} /> Track Package</NavDropdown.Item>
+
                 </NavDropdown>
-                <NavDropdown title="Reports" id="basic-nav-dropdown-reports">
+                <NavDropdown title={<span><FontAwesomeIcon icon={faChartBar} /> Reports</span>} id="basic-nav-dropdown-reports">
                   <NavDropdown.Item href="/globalReport"><FontAwesomeIcon icon={faListNumeric} /> Global Report</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/tracking"><FontAwesomeIcon icon={faTruck} /> Track Package</Nav.Link>
@@ -51,8 +55,8 @@ const Header = () => {
             </>
             :
             <>
-              <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/tracking">Track Package</Nav.Link>
+              <Nav.Link href="/login"><FontAwesomeIcon icon={faKey} />  Login</Nav.Link>
+              <Nav.Link href="/tracking"><FontAwesomeIcon icon={faTruck} /> Track Package</Nav.Link>
             </>
             }
           </Nav>

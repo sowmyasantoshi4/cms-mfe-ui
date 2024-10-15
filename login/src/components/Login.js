@@ -68,19 +68,19 @@ const Login = () => {
       
         doLogin(lusername, lpassword)
         .then(response => {
-          //console.log("login PAGE GOT THE resp="+JSON.stringify(response))
+          console.log("login PAGE GOT THE resp="+JSON.stringify(response))
           if (response instanceof Error) {
             setFormEErrors('ERROR_AT_LOGIN');
           } else {
-            if (!response.isValid) {
+            if (!response.valid) {
               setFormEErrors('INVALID_CRED');
             } else {
               clearForm();
 
              //console.log("userProfile",response)
-              if(response.isValid ){
+              if(response.valid ){
                 dispatch(login(response));
-                navigate("/welcome");
+                navigate("/dashboard");
               }else{
                 setErrors({lusername: 'This Username is INACTIVE'});
               }
@@ -166,9 +166,9 @@ const Login = () => {
     <Suspense fallback={<div>Loading...</div>}>
     {/* <div className="bg-login min-vh-50 d-flex flex-row align-items-center"> */}
     <div>
-      <Container>
+      <Container className='p-5'>
         <Row className="d-flex justify-content-center">
-          <Col xs={6} md={6} >
+          <Col xs={6} md={4} >
               <Card className='border-0 shadow-lg bg-white rounded'>
                 <Card.Header className='bg-card-head-none bg-info text-white p-3 d-flex justify-content-center bg-card-title'>
                   Courier Mangement System 

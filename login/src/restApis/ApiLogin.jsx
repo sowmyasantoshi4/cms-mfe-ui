@@ -1,5 +1,6 @@
+import axios from 'axios';
 
-export const doLogin = ( uname, password ) => {
+export const doLoginOld = ( uname, password ) => {
     //let obj = { "userName": 'Test', "userid": '123' , "isValid" : true, "permissionsLevel" : 1 };
     //console.log("react app login url is "+process.env.REACT_APP_LOGIN_API)
     let userObj = null;
@@ -48,4 +49,30 @@ export const doLogin = ( uname, password ) => {
     });
 
 }
+
+export const doLogin = async (username, password) => {
+  return new Promise((resolve, reject) => {
+    // Send login credentials to the backend in the request body
+    axios.post(process.env.REACT_APP_LOGIN_API, {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      // Check if the login was successful
+      if (response.data.valid === true) {
+        // Save token and other info in localStorage
+        const { token, expiryTime } = response.data;
+        // localStorage.setItem('token', token);
+        localStorage.setItem('expiryTime', expiryTime);
+        localStorage.setItem('userProfile', JSON.stringify(response.data));
+        resolve(response.data);
+      } else {
+        reject(new Error("Invalid username or password"));
+      }
+    })
+    .catch(error => {
+      reject(error);
+    });
+  });
+};
  

@@ -1,9 +1,10 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../src/globalState/store'; // Import both store and persistor
+import axios from "axios";
 
 import Dashboard from "./components/Dashboard";
 import Welcome from "./components/Welcome";
@@ -28,11 +29,26 @@ const AddStaff = React.lazy(() => import('adminMFE/AddStaff'));
 const AddPackage = React.lazy(() => import('packagesMFE/AddPackage'));
 const UpdatePackage = React.lazy(() => import('packagesMFE/UpdatePackage'));
 
-
+// src/utils/auth.js
+const isTokenExpired = () => {
+  const expiryTime = localStorage.getItem('expiryTime');
+  if (expiryTime && Date.now() > expiryTime) {
+    return true;
+  }
+  return false;
+};
 
 const App = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (isTokenExpired()) {
+      dispatch(logout());
+      window.location.href = '/login';  // Redirect to login page
+    }
+  }, []);
+  
   return (
       <>
         <Router>
@@ -80,3 +96,18 @@ root.render(
       <App />
   </PersistGate>
 </Provider>)
+
+// Add a request interceptor to attach the token to every request
+axios.interceptors.request.use(
+  (config) => {
+      // Attach the token to the Authorization header
+    let userProfileData = JSON.parse(localStorage.getItem("userProfile"));
+    if( userProfileData && userProfileData.valid===true && userProfileData.token ){
+          config.headers.Authorization =  `Bearer ${userProfileData.token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
