@@ -2,8 +2,8 @@ name: Build and Deploy shellMFE
 
 on:
   push:
-    paths:
-      - 'shell/**'  # Trigger this workflow only when changes happen in 'shell' folder
+    #paths:
+     # - 'shell/**'  # Trigger this workflow only when changes happen in 'shell' folder
     branches:
       - master  # Trigger only on pushes to 'master' branch
 
@@ -25,10 +25,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for shellMFE
-      run: docker build -t sowmyasantoshi4/shell-mfe:latest ./shellMFE
+      run: docker build -t sowmyasantoshi4/shell:latest ./shell
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/shell-mfe:latest
+      run: docker push sowmyasantoshi4/shell:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f ./shellMFE/deployment.yml
-        kubectl apply -f ./shellMFE/service.yml
+        kubectl apply -f ./shell/deployment.yml
+        kubectl apply -f ./shell/service.yml
