@@ -1,25 +1,22 @@
 # Step 1: Build the app
 FROM node:18 AS build
 
-# Set working directory inside the container
 WORKDIR /app
 
-# Copy the package.json files into the container
-# Since the Dockerfile is inside the ./shell folder, we need to adjust the paths to reflect that
-COPY shell/package*.json ./
+# Copy the source files
+COPY ./package*.json ./
 RUN npm install
 
-# Copy the entire source code into the container
-COPY shell .
+COPY ./ ./
 
 # Build the app
 RUN npm run build
 
-# Step 2: Serve the app using a lightweight web server (nginx)
+# Step 2: Serve the app using a lightweight web server
 FROM nginx:alpine
 
 # Copy the build files from the build stage to the nginx folder
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose the port on which the app will run
 EXPOSE 80
