@@ -1,0 +1,51 @@
+name: Build and Deploy ShellMFE
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Step 2: Set up Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    # Step 3: Log in to Docker Hub
+    - name: Log in to Docker Hub
+      uses: docker/shell-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 4: Build the Docker image for shellMFE
+    - name: Build Docker image
+      run: docker build -t sowmyasantoshi4/shell-mfe:latest ./shellMFE
+
+    # Step 5: Push the Docker image to Docker Hub
+    - name: Push Docker image
+      run: docker push yourusername/shell-mfe:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    # Step 6: Install kubectl
+    - name: Set up Kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'latest'
+
+    # Step 7: Apply the Kubernetes configuration (deployment + service)
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f ./shellMFE/deployment.yml
+        kubectl apply -f ./shellMFE/service.yml
