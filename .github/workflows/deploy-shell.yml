@@ -25,10 +25,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for shellMFE
-      run: docker build -t sowmyasantoshi4/shell:latest ./shell
+      run: docker build -t sowmyasantoshi4/shell-mfe:latest ./shell-mfe
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/shell:latest
+      run: docker push sowmyasantoshi4/shell-mfe:latest
 
   deploy:
     runs-on: ubuntu-latest
