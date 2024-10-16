@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shell-deployment
+  name: admin-portal-deployment
   labels:
-    app: shell
+    app: admin-portal
 spec:
   replicas: 3  # Number of pod instances
   selector:
     matchLabels:
-      app: shell
+      app: admin-portal
   template:
     metadata:
       labels:
-        app: shell
+        app: admin-portal
     spec:
       containers:
-      - name: shell
-        image: sowmyasantoshi4/shell:latest  # The image to deploy
+      - name: admin-portal
+        image: sowmyasantoshi4/admin-portal:latest  # The image to deploy
         ports:
-        - containerPort: 9000
+        - containerPort: 9005
         resources:
           limits:
             memory: "512Mi"

@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shell-deployment
+  name: packages-deployment
   labels:
-    app: shell
+    app: packages
 spec:
   replicas: 3  # Number of pod instances
   selector:
     matchLabels:
-      app: shell
+      app: packages
   template:
     metadata:
       labels:
-        app: shell
+        app: packages
     spec:
       containers:
-      - name: shell
-        image: sowmyasantoshi4/shell:latest  # The image to deploy
+      - name: packages
+        image: sowmyasantoshi4/packages:latest  # The image to deploy
         ports:
-        - containerPort: 9000
+        - containerPort: 9006
         resources:
           limits:
             memory: "512Mi"

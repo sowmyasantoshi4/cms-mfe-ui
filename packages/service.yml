@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: shell-service
+  name: packages-service
 spec:
   selector:
-    app: shell  # Match the app label from the deployment
+    app: packages  # Match the app label from the deployment
   ports:
     - protocol: TCP
-      port: 9000  # Exposed port
-      targetPort: 9000  # Port inside the pod
+      port: 9006  # Exposed port
+      targetPort: 9006  # Port inside the pod
   type: LoadBalancer  # Expose to external traffic (use NodePort if internal)

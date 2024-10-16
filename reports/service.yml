@@ -7,6 +7,6 @@ spec:
     app: shell  # Match the app label from the deployment
   ports:
     - protocol: TCP
-      port: 9000  # Exposed port
-      targetPort: 9000  # Port inside the pod
+      port: 9004  # Exposed port
+      targetPort: 9004  # Port inside the pod
   type: LoadBalancer  # Expose to external traffic (use NodePort if internal)

@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shell-deployment
+  name: reports-deployment
   labels:
-    app: shell
+    app: reports
 spec:
   replicas: 3  # Number of pod instances
   selector:
     matchLabels:
-      app: shell
+      app: reports
   template:
     metadata:
       labels:
-        app: shell
+        app: reports
     spec:
       containers:
-      - name: shell
-        image: sowmyasantoshi4/shell:latest  # The image to deploy
+      - name: reports
+        image: sowmyasantoshi4/reports:latest  # The image to deploy
         ports:
-        - containerPort: 9000
+        - containerPort: 9004
         resources:
           limits:
             memory: "512Mi"
