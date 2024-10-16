@@ -1,4 +1,4 @@
-name: Build and Deploy adminMFE
+name: Build and Deploy admin-portalMFE
 
 on:
   push:
@@ -24,11 +24,11 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build Docker image for adminMFE
-      run: docker build -t sowmyasantoshi4/admin-mfe:latest ./adminMFE
+    - name: Build Docker image for admin-portalMFE
+      run: docker build -t sowmyasantoshi4/admin-portal:latest ./admin-portal
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/admin-mfe:latest
+      run: docker push sowmyasantoshi4/admin-portal:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Deploy to Kubernetes
+    - name: Deploy admin-portalMFE to Kubernetes
       run: |
-        kubectl apply -f ./adminMFE/deployment.yml
-        kubectl apply -f ./adminMFE/service.yml
+        kubectl apply -f ./admin-portal/deployment.yml
+        kubectl apply -f ./admin-portal/service.yml

@@ -25,10 +25,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for packagesMFE
-      run: docker build -t sowmyasantoshi4/packages-mfe:latest ./packagesMFE
+      run: docker build -t sowmyasantoshi4/packages:latest ./packages
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/packages-mfe:latest
+      run: docker push sowmyasantoshi4/packages:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Deploy to Kubernetes
+    - name: Deploy packagesMFE to Kubernetes
       run: |
-        kubectl apply -f ./packagesMFE/deployment.yml
-        kubectl apply -f ./packagesMFE/service.yml
+        kubectl apply -f ./packages/deployment.yml
+        kubectl apply -f ./packages/service.yml

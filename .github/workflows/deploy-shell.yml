@@ -2,8 +2,8 @@ name: Build and Deploy shellMFE
 
 on:
   push:
-    #paths:
-     # - 'shell/**'  # Trigger this workflow only when changes happen in 'shell' folder
+    paths:
+     - 'shell/**'  # Trigger this workflow only when changes happen in 'shell' folder
     branches:
       - master  # Trigger only on pushes to 'master' branch
 
@@ -40,7 +40,7 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Deploy to Kubernetes
+    - name: Deploy Shell to Kubernetes
       run: |
         kubectl apply -f ./shell/deployment.yml
         kubectl apply -f ./shell/service.yml

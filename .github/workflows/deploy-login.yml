@@ -3,7 +3,7 @@ name: Build and Deploy loginMFE
 on:
   push:
     paths:
-      - 'login/**'  # Trigger this workflow only when changes happen in 'login' folder
+      - 'login/**'  # Trigger this workflow only when changes happen in 'shell' folder
     branches:
       - master  # Trigger only on pushes to 'master' branch
 
@@ -25,10 +25,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for loginMFE
-      run: docker build -t sowmyasantoshi4/login-mfe:latest ./loginMFE
+      run: docker build -t sowmyasantoshi4/login:latest ./login
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/login-mfe:latest
+      run: docker push sowmyasantoshi4/login:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Deploy to Kubernetes
+    - name: Deploy loginMFE to Kubernetes
       run: |
-        kubectl apply -f ./loginMFE/deployment.yml
-        kubectl apply -f ./loginMFE/service.yml
+        kubectl apply -f ./login/deployment.yml
+        kubectl apply -f ./login/service.yml

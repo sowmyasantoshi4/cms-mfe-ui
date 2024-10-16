@@ -25,10 +25,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for trackingMFE
-      run: docker build -t sowmyasantoshi4/tracking-mfe:latest ./trackingMFE
+      run: docker build -t sowmyasantoshi4/tracking:latest ./tracking
 
     - name: Push Docker image to Docker Hub
-      run: docker push sowmyasantoshi4/tracking-mfe:latest
+      run: docker push sowmyasantoshi4/tracking:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Deploy to Kubernetes
+    - name: Deploy trackingMFE to Kubernetes
       run: |
-        kubectl apply -f ./trackingMFE/deployment.yml
-        kubectl apply -f ./trackingMFE/service.yml
+        kubectl apply -f ./tracking/deployment.yml
+        kubectl apply -f ./tracking/service.yml

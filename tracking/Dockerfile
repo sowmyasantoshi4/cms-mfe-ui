@@ -4,13 +4,13 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Copy the source files
-COPY ./package*.json ./
+COPY ./tracking/package*.json ./
 RUN npm install
 
-COPY ./ ./
+COPY ./tracking .
 
 # Build the app
-RUN npm run build:dev
+RUN npm run build
 
 # Step 2: Serve the app using a lightweight web server
 FROM nginx:alpine
