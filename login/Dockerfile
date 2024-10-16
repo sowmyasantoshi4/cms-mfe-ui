@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./login/package*.json ./
 RUN npm install
 
-COPY ./login .
+COPY ./ .
 
 # Build the app
 RUN npm run build:dev
