@@ -4,7 +4,7 @@ metadata:
   name: shell-service
 spec:
   selector:
-    app: shell  # Match the app label from the deployment
+    app: shell-deployment  # Match the app label from the deployment
   ports:
     - protocol: TCP
       port: 9000  # Exposed port

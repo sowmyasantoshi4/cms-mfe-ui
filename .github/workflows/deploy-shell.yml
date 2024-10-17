@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy Shell to Kubernetes
       run: |
-        kubectl apply -f ./deployment.yml
-        kubectl apply -f ./service.yml
+        kubectl apply -f ./shell/deployment.yml
+        kubectl apply -f ./shell/service.yml
