@@ -6,7 +6,7 @@ import {  Route, Routes } from "react-router-dom";
 import "./index.css";
 import TrackPackage from "./components/TrackPackage";
 import { Provider } from "react-redux";
-import { store, persistor } from '../../shell/src/globalState/store'; // Import both store and persistor
+import { store, persistor } from 'shell/store'; // Import both store and persistor
 
 const App = () => (
   <Router>

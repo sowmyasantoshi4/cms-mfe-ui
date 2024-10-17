@@ -64,7 +64,9 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "reports",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+      },
       exposes: {
         './GlobalReport' : './src/components/GlobalReport'
       },

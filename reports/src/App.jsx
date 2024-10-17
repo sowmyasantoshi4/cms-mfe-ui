@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import {  Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store, persistor } from '../../shell/src/globalState/store'; // Import both store and persistor
+import { store, persistor } from 'shell/store'; // Import both store and persistor
 
 import "./index.css";
 import GlobalReport from "./components/GlobalReport";

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import {  Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store, persistor } from '../../shell/src/globalState/store'; // Import both store and persistor
+import { store } from 'shell/state'; // Import authSlice from shell MFE remotely
 
 import "./index.css";
 import AddBranch from "./components/branch/AddBranch";
