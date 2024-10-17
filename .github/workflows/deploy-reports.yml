@@ -39,8 +39,9 @@ jobs:
       uses: azure/setup-kubectl@v1
       with:
         version: 'latest'
-
+    - name: List shell directory
+      run: ls -R ./reports  # Debugging step to ensure files exist
     - name: Deploy reportsMFE to Kubernetes
       run: |
-        kubectl apply -f ./deployment.yml
-        kubectl apply -f ./service.yml
+        kubectl apply -f ./reports/deployment.yml
+        kubectl apply -f ./reports/service.yml
