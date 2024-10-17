@@ -40,13 +40,17 @@ jobs:
       with:
         version: 'latest'
 
-    - name: List reports directory
-      run: ls -R ./reports  # Debugging step to ensure files exist
+    - name: Check if reports directory exists
+      run: |
+        echo "Checking if reports directory exists"
+        ls -R
+        echo "Attempting to list reports folder contents"
+        ls -R ./reports
 
     - name: Deploy reportsMFE to Kubernetes
       run: |
-        kubectl apply -f ./reports/deployment.yml
-        kubectl apply -f ./reports/service.yml
+        kubectl apply -f deployment.yml
+        kubectl apply -f service.yml
 
     # Optional: Check deployment success
     - name: Check if Deployment was successful

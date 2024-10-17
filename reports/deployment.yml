@@ -5,7 +5,7 @@ metadata:
   labels:
     app: reports
 spec:
-  replicas: 2  # Number of pod instances
+  replicas: 3  # Number of pod instances
   selector:
     matchLabels:
       app: reports
