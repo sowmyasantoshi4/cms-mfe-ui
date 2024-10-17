@@ -10,7 +10,10 @@ import Row from 'react-bootstrap/Row';
 import { useNavigate, Link } from 'react-router-dom';
 
 import DataProfile from './DataProfile';
-import { login } from '../../../shell/src/globalState/authSlice';  // Import the login action from the shell's Redux store
+// import { login } from '../../../shell/src/globalState/authSlice';  // Import the login action from the shell's Redux store
+// import { authSlice } from 'shell/authSlice'; // Use the remote module
+import { login } from 'shell/authSlice'; // Import authSlice from shell MFE remotely
+
 import { useDispatch, useSelector } from 'react-redux';
 import { doLogin } from '../restApis/ApiLogin';
 
@@ -78,18 +81,19 @@ const Login = () => {
               clearForm();
 
              //console.log("userProfile",response)
-              if(response.valid ){
-                dispatch(login(response));
+              // if(response.valid ){
+                // dispatch(login(response));
+                dispatch(login(response)); // Use the actions from authSlice
                 navigate("/dashboard");
-              }else{
-                setErrors({lusername: 'This Username is INACTIVE'});
-              }
+              // }else{
+              //   setErrors({lusername: 'This Username is INACTIVE'});
+              // }
     
             }
           }
         })
         .catch(err => {
-          //console.log("err",err)
+          console.log("err",err)
           setFormEErrors('ERROR_AT_LOGIN');
         })
         .finally(r => {

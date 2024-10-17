@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./tracking/package*.json ./
 RUN npm install
 
-COPY ./tracking .
+COPY ./ .
 
 # Build the app
 RUN npm run build:dev

@@ -83,6 +83,7 @@ module.exports = (_, argv) => ({
       exposes: {
         // Share the global state provider 
         './store': './src/globalState/store',  // Expose the Redux store to other MFEs
+        './authSlice': './src/globalState/authSlice', // Expose the file
       },
       shared: {
         ...deps,

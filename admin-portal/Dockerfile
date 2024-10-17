@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./admin-portal/package*.json ./
 RUN npm install
 
-COPY ./admin-portal .
+COPY ./ .
 
 # Build the app
 RUN npm run build:dev

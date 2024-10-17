@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../src/globalState/store'; // Import both store and persistor
 import axios from "axios";
@@ -15,6 +15,7 @@ import "./index.css";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ErrorBoundaryWrapper from './components/ErrorBoundaryWrapper'; // Import the wrapper
 
 // Lazy load the shared components
 // const Header = React.lazy(() => import('sharedMFE/Header'));
@@ -41,7 +42,8 @@ const isTokenExpired = () => {
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
+  const userProfile = useSelector((state) => state.usr)
+console.log(userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
       dispatch(logout());
@@ -50,36 +52,42 @@ const App = () => {
   }, []);
   
   return (
-      <>
-        <Router>
-          <Suspense fallback={<div>Loading Header...</div>}>
+    <>
+      <Router>
+        {/* Wrap the entire layout and routes inside ErrorBoundary and Suspense */}
+        {/* <ErrorBoundaryWrapper> */}
+          {/* Single Suspense fallback for the entire lazy-loaded routes */}
+          <Suspense fallback={<Loader />}>
+            {/* Header */}
             <Header />
-          </Suspense>
             <div className="container">
-              <Suspense fallback={<Loader />}>
-                  <Routes>
-                    <Route path="/" element={<Home loading={loading} setLoading={setLoading}/>}/>
-                    <Route  path="/dashboard" element={<Dashboard />}/>
-                    <Route  path="/welcome/*" element={<Welcome />}/>
-                    <Route  path="/home" element={<Home />}/>
-                    <Route  path="/login" element={<Login />}/>
-                    <Route  path="/logout" element={<Login />}/>
-                    <Route  path="/tracking" element={<TrackPackage />}/>
-                    <Route  path="/globalReport" element={<GlobalReport />}/>
-                    <Route  path="/addBranch" element={<AddBranch />}/>
-                    <Route  path="/addStaff" element={<AddStaff />}/>
-                    <Route path="/addPackage" element={<AddPackage />}/>
-                    <Route path="/updatePackage" element={<UpdatePackage />}/>
-                    
-                    <Route path="*" element={<NotFound />}/>
-                  </Routes>
-              </Suspense>
+              <Routes>
+                {/* Main Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/tracking" element={<TrackPackage />} />
+
+                {/* Logged in users accessible routes */}
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/welcome/*" element={<Welcome />} />
+                <Route path="/globalReport" element={<GlobalReport />} />
+                <Route path="/addBranch" element={<AddBranch />} />
+                <Route path="/addStaff" element={<AddStaff />} />
+                <Route path="/addPackage" element={<AddPackage />} />
+                <Route path="/updatePackage" element={<UpdatePackage />} />
+
+                {/* Catch-all route for 404 */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
             </div>
-          <Suspense fallback={<div>Loading Footer...</div>}>
+
+            {/* Footer */}
             <Footer />
           </Suspense>
-          </Router>
-        </>
+        {/* </ErrorBoundaryWrapper> */}
+      </Router>
+    </>
     
   )
 };

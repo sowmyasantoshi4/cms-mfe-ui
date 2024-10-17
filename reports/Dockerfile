@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./reports/package*.json ./
 RUN npm install
 
-COPY ./reports .
+COPY ./ .
 
 # Build the app
 RUN npm run build:dev
