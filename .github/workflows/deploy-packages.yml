@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy packagesMFE to Kubernetes
       run: |
-        kubectl apply -f ./packages/deployment.yml
-        kubectl apply -f ./packages/service.yml
+        kubectl apply -f ./deployment.yml
+        kubectl apply -f ./service.yml

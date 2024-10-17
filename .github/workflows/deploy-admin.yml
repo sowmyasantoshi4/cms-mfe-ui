@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy admin-portalMFE to Kubernetes
       run: |
-        kubectl apply -f ./admin-portal/deployment.yml
-        kubectl apply -f ./admin-portal/service.yml
+        kubectl apply -f ./deployment.yml
+        kubectl apply -f ./service.yml

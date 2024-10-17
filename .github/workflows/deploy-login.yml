@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy loginMFE to Kubernetes
       run: |
-        kubectl apply -f ./login/deployment.yml
-        kubectl apply -f ./login/service.yml
+        kubectl apply -f ./deployment.yml
+        kubectl apply -f ./service.yml

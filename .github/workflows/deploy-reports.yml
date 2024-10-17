@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy reportsMFE to Kubernetes
       run: |
-        kubectl apply -f ./reports/deployment.yml
-        kubectl apply -f ./reports/service.yml
+        kubectl apply -f ./deployment.yml
+        kubectl apply -f ./service.yml

@@ -4,10 +4,10 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Copy the source files
-COPY ./reports/package*.json ./
+COPY ./package*.json ./
 RUN npm install
 
-COPY ./ .
+COPY ./ ./
 
 # Build the app
 RUN npm run build:dev

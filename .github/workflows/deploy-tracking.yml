@@ -42,5 +42,5 @@ jobs:
 
     - name: Deploy trackingMFE to Kubernetes
       run: |
-        kubectl apply -f ./tracking/deployment.yml
-        kubectl apply -f ./tracking/service.yml
+        kubectl apply -f ./deployment.yml
+        kubectl apply -f ./service.yml
