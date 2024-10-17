@@ -43,7 +43,7 @@ jobs:
     - name: Check if reports directory exists
       run: |
         echo "Checking if reports directory exists"
-        ls -R
+        ls
         echo "Attempting to list reports folder contents"
         ls -R ./reports
 
