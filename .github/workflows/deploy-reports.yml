@@ -30,30 +30,30 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push sowmyasantoshi4/reports:latest
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    steps:
-    - name: Set up Kubectl
-      uses: azure/setup-kubectl@v1
-      with:
-        version: 'latest'
+  #   steps:
+  #   - name: Set up Kubectl
+  #     uses: azure/setup-kubectl@v1
+  #     with:
+  #       version: 'latest'
 
-    - name: Check if reports directory exists
-      run: |
-        echo "Checking if reports directory exists"
-        ls
-        echo "Attempting to list reports folder contents"
-        ls -R ./reports
+  #   - name: Check if reports directory exists
+  #     run: |
+  #       echo "Checking if reports directory exists"
+  #       ls
+  #       echo "Attempting to list reports folder contents"
+  #       ls -R ./reports
 
-    - name: Deploy reportsMFE to Kubernetes
-      run: |
-        kubectl apply -f deployment.yml
-        kubectl apply -f service.yml
+  #   - name: Deploy reportsMFE to Kubernetes
+  #     run: |
+  #       kubectl apply -f deployment.yml
+  #       kubectl apply -f service.yml
 
-    # Optional: Check deployment success
-    - name: Check if Deployment was successful
-      run: |
-        kubectl get pods
-        kubectl describe deployment reportsMFE
+  #   # Optional: Check deployment success
+  #   - name: Check if Deployment was successful
+  #     run: |
+  #       kubectl get pods
+  #       kubectl describe deployment reportsMFE

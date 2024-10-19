@@ -30,20 +30,20 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push sowmyasantoshi4/shell:latest
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    steps:
-    - name: Set up Kubectl
-      uses: azure/setup-kubectl@v1
-      with:
-        version: 'latest'
+  #   steps:
+  #   - name: Set up Kubectl
+  #     uses: azure/setup-kubectl@v1
+  #     with:
+  #       version: 'latest'
 
-    - name: List shell directory
-      run: ls -R ./shell  # Debugging step to ensure files exist
+  #   - name: List shell directory
+  #     run: ls -R ./shell  # Debugging step to ensure files exist
 
-    - name: Deploy Shell to Kubernetes
-      run: |
-        kubectl apply -f ./shell/deployment.yml
-        kubectl apply -f ./shell/service.yml
+  #   - name: Deploy Shell to Kubernetes
+  #     run: |
+  #       kubectl apply -f ./shell/deployment.yml
+  #       kubectl apply -f ./shell/service.yml
