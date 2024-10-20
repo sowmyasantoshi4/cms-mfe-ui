@@ -36,13 +36,13 @@ const PackageStatus = (props) => {
 
   return (
     <fieldset className='bg-light'>
-      <legend className='alert alert-primary px-2 py-1'>Status Updates</legend>
+      <legend className='alert alert-primary px-2 py-1'>Status Updates 1</legend>
       <Row>
         <Col xs={11} md={11}>
           <ListGroup>
               {sd.map((key, index) => {
                 let updatedOn = key.statusUpdatedOn;
-                let fontCss = updatedOn ? "text-success" : 'text-warning';
+                let fontCss = updatedOn ? "text-primary" : 'text-warning';
                 let latestCss = (currStatusId === key.statusId) ? "fw-bold" : '';
                 let isLatest = (currStatusId === key.statusId) ? true : false;
 
@@ -50,7 +50,7 @@ const PackageStatus = (props) => {
                   <ListGroup.Item key={index} className={`d-flex align-items-center ${isLatest ? '' : ''}`}>
                     {updatedOn ? (
                       isLatest ? (
-                        <span className={`timeline-icon border border-2 border-success alert alert-success me-2`}>
+                        <span className={`timeline-icon border border-2 border-primary alert alert-primary me-2`}>
                           <FontAwesomeIcon icon={faCheck} className='text-success fa-sm fa-fw' />
                         </span>
                       ) : (

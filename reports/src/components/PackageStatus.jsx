@@ -42,7 +42,7 @@ const PackageStatus = (props) => {
           <ListGroup>
             {sd.map((key, index) => {
               let updatedOn = key.statusUpdatedOn;
-              let fontCss = updatedOn ? "text-success" : 'text-warning';
+              let fontCss = updatedOn ? "text-primary" : 'text-warning';
               let latestCss = (currStatusId === key.statusId) ? "fw-bold" : '';
               let isLatest = (currStatusId === key.statusId) ? true : false;
 
@@ -50,8 +50,8 @@ const PackageStatus = (props) => {
                 <ListGroup.Item key={index} className={`d-flex align-items-center ${isLatest ? '' : ''}`}>
                   {updatedOn ? (
                     isLatest ? (
-                      <span className={`timeline-icon border border-2 border-success alert alert-success me-2`}>
-                        <FontAwesomeIcon icon={faCheck} className='text-success fa-sm fa-fw' />
+                      <span className={`timeline-icon border border-2 border-primary alert alert-primary me-2`}>
+                        <FontAwesomeIcon icon={faCheck} className='text-primary fa-sm fa-fw' />
                       </span>
                     ) : (
                       <span className={`timeline-icon border border-1 border-info alert alert-info me-2`}>

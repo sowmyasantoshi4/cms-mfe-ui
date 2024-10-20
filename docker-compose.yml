@@ -1,0 +1,41 @@
+version: '2.0'
+services:
+  cms-ui-host:
+    build:
+      context: ./shell
+    ports:
+      - "9000:9000"
+    container_name: cms-ui-host
+    stdin_open: true
+  login:
+      build:
+        context: ./login
+      ports:
+        - "9002:9002"
+      container_name: login
+      stdin_open: true
+  tracking:
+    build:
+      context: ./tracking
+    ports:
+      - "9003:9003"
+    container_name: tracking
+    stdin_open: true
+  reports:
+    build:
+      context: './reports'
+    ports:
+      - "9004:9004"
+    container_name: reports
+  packages:
+    build:
+      context: './packages'
+    ports:
+      - "9006:9006"
+    container_name: packages
+  admin-portal:
+    build:
+      context: './admin-portal'
+    ports:
+      - "9005:9005"
+    container_name: admin-portal

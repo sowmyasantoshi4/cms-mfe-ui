@@ -66,16 +66,17 @@ console.log(userProfile)
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Login />} />
                 <Route path="/tracking" element={<TrackPackage />} />
 
                 {/* Logged in users accessible routes */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/welcome/*" element={<Welcome />} />
-                <Route path="/globalReport" element={<GlobalReport />} />
-                <Route path="/addBranch" element={<AddBranch />} />
-                <Route path="/addStaff" element={<AddStaff />} />
-                <Route path="/addPackage" element={<AddPackage />} />
-                <Route path="/updatePackage" element={<UpdatePackage />} />
+                <Route path="/reports/globalReport" element={<GlobalReport />} />
+                <Route path="/admin/addBranch" element={<AddBranch />} />
+                <Route path="/admin/addStaff" element={<AddStaff />} />
+                <Route path="/packages/addPackage" element={<AddPackage />} />
+                <Route path="/packages/updatePackage" element={<UpdatePackage />} />
 
                 {/* Catch-all route for 404 */}
                 <Route path="*" element={<NotFound />} />
