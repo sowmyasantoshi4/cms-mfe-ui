@@ -1,20 +1,20 @@
 version: '3.8'
 
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount your Nginx config
-    depends_on:
-      - shell
-      - login
-      - tracking
-      - reports
-      - admin
-      - packages
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount your Nginx config
+  #   depends_on:
+  #     - shell
+  #     - login
+  #     - tracking
+  #     - reports
+  #     - admin
+  #     - packages
       
   shell:
     image: sowmyasantoshi4/shell:latest
