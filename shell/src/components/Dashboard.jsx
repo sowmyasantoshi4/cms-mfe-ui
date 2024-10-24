@@ -76,6 +76,7 @@ const [loading, setLoading] = useState(false);
       loadDistricts();
       loadDesignations();
       loadAllStaff();
+      loadStatus();
     }catch(err){
       console.log("unable to load options : ",err)
     }
