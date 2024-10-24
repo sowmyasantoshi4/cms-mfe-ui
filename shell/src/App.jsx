@@ -16,6 +16,7 @@ import Loader from "./components/Loader";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ErrorBoundaryWrapper from './components/ErrorBoundaryWrapper'; // Import the wrapper
+import { logout } from "./globalState/authSlice";
 
 // Lazy load the shared components
 // const Header = React.lazy(() => import('sharedMFE/Header'));
@@ -43,11 +44,11 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.usr)
-console.log(userProfile)
+// console.log(userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
       dispatch(logout());
-      window.location.href = '/login';  // Redirect to login page
+      // window.location.href = '/login';  // Redirect to login page
     }
   }, []);
   
