@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <>
     <Navbar expand="lg" className="bg-body-tertiary1" bg="dark" data-bs-theme="dark">
-        <Navbar.Brand href="/home" className='mx-2'> Courier Management System (CMS) </Navbar.Brand>
+        <Navbar.Brand href="/shell/home" className='mx-2'> Courier Management System (CMS) </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -35,7 +35,7 @@ const Header = () => {
               ? 
               // Login User Menu
               <>
-                <Nav.Link href="/dashboard"> <FontAwesomeIcon icon={faList} /> Dashboard</Nav.Link>
+                <Nav.Link href="/shell/dashboard"> <FontAwesomeIcon icon={faList} /> Dashboard</Nav.Link>
                 <NavDropdown title={<span><FontAwesomeIcon icon={faUserShield} /> Admin Portal</span>} id="basic-nav-dropdown-admin">
                   <NavDropdown.Item href="/admin/addStaff"><FontAwesomeIcon icon={faPersonCirclePlus} /> Add Staff</NavDropdown.Item>
                   <NavDropdown.Item href="/admin/addBranch"><FontAwesomeIcon icon={faPlusCircle} /> Add Branch</NavDropdown.Item>

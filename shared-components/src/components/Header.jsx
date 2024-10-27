@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <>
     <Navbar expand="lg" className="bg-body-tertiary1" bg="dark" data-bs-theme="dark">
-        <Navbar.Brand href="/home" className='mx-2'> Courier Management System (CMS) </Navbar.Brand>
+        <Navbar.Brand href="/shell/home" className='mx-2'> Courier Management System (CMS) </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

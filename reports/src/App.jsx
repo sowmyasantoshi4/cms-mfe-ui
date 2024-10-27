@@ -11,7 +11,7 @@ import GlobalReport from "./components/GlobalReport";
 const App = () => (
   <Router>
     <Routes>
-        <Route path="/globalReport" element={<GlobalReport />}/>
+        <Route path="/reports/globalReport" element={<GlobalReport />}/>
     </Routes>
  </Router>
 );

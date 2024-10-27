@@ -17,19 +17,33 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ErrorBoundaryWrapper from './components/ErrorBoundaryWrapper'; // Import the wrapper
 import { logout } from "./globalState/authSlice";
+import { PageUnavailable } from "./components/PageUnavailable";
 
 // Lazy load the shared components
 // const Header = React.lazy(() => import('sharedMFE/Header'));
 // const Footer = React.lazy(() => import('sharedMFE/Footer'));
 
-const Login = React.lazy(() => import('loginMFE/Login'));
-const TrackPackage = React.lazy(() => import('trackingMFE/TrackPackage'));
-const GlobalReport = React.lazy(() => import('reportsMFE/GlobalReport'));
-const AddBranch = React.lazy(() => import('adminMFE/AddBranch'));
-const AddStaff = React.lazy(() => import('adminMFE/AddStaff'));
 
-const AddPackage = React.lazy(() => import('packagesMFE/AddPackage'));
-const UpdatePackage = React.lazy(() => import('packagesMFE/UpdatePackage'));
+// Function to safely load a component
+const loadComponent = (importFunc) => {
+  return React.lazy(() =>
+    importFunc()
+      .then((module) => ({ default: module.default }))
+      .catch((error) => {
+        console.error("Error loading component:", error);
+        return { default: () => <PageUnavailable /> }; // Fallback component
+      })
+  );
+};
+
+const Login = loadComponent(() => import('loginMFE/Login'));
+const TrackPackage = loadComponent(() => import('trackingMFE/TrackPackage'));
+const GlobalReport = loadComponent(() => import('reportsMFE/GlobalReport'));
+const AddBranch = loadComponent(() => import('adminMFE/AddBranch'));
+const AddStaff = loadComponent(() => import('adminMFE/AddStaff'));
+
+const AddPackage = loadComponent(() => import('packagesMFE/AddPackage'));
+const UpdatePackage = loadComponent(() => import('packagesMFE/UpdatePackage'));
 
 // src/utils/auth.js
 const isTokenExpired = () => {
@@ -44,6 +58,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.usr)
+
+  
 // console.log(userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
@@ -51,7 +67,7 @@ const App = () => {
       // window.location.href = '/login';  // Redirect to login page
     }
   }, []);
-  
+
   return (
     <>
       <Router>
@@ -65,14 +81,14 @@ const App = () => {
               <Routes>
                 {/* Main Routes */}
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/shell/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Login />} />
                 <Route path="/tracking" element={<TrackPackage />} />
 
                 {/* Logged in users accessible routes */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/welcome/*" element={<Welcome />} />
+                <Route path="/shell/dashboard" element={<Dashboard />} />
+                <Route path="/shell/welcome" element={<Welcome />} />
                 <Route path="/reports/globalReport" element={<GlobalReport />} />
                 <Route path="/admin/addBranch" element={<AddBranch />} />
                 <Route path="/admin/addStaff" element={<AddStaff />} />
@@ -80,7 +96,8 @@ const App = () => {
                 <Route path="/packages/updatePackage" element={<UpdatePackage />} />
 
                 {/* Catch-all route for 404 */}
-                <Route path="*" element={<NotFound />} />
+                {/* {!portState && */}
+                  <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
 

@@ -12,8 +12,8 @@ import AddStaff from "./components/staff/AddStaff";
 const App = () => (
   <Router>
     <Routes>
-        <Route path="/addBranch" element={<AddBranch />}/>
-        <Route path="/addStaff" element={<AddStaff />}/>
+        <Route path="/admin/addBranch" element={<AddBranch />}/>
+        <Route path="/admin/addStaff" element={<AddStaff />}/>
 
     </Routes>
  </Router>
