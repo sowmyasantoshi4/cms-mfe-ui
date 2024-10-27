@@ -93,7 +93,7 @@ export const postPackageUpdate = (data, referenceNo) => {
             "dispatchStaffId": data.r_staff_member,
             "referenceNo": referenceNo
         }
-        //process.env.REACT_APP_API_PACKAGE_UPDATE_STATUS = http://localhost:8080/cmsapi/packages/updateStatus
+        //process.env.REACT_APP_API_PACKAGE_UPDATE_STATUS = http://localhost:8088/cmsapi/packages/updateStatus
         let URL = process.env.REACT_APP_API_PACKAGE_UPDATE_STATUS;
         axios.post(URL, _data)
             .then(response => {

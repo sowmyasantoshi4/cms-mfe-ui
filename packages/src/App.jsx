@@ -12,8 +12,8 @@ import UpdatePackage from "./components/UpdatePackage";
 const App = () => (
   <Router>
     <Routes>
-        <Route path="/addPackage" element={<AddPackage />}/>
-        <Route path="/updatePackage" element={<UpdatePackage />}/>
+        <Route path="/packages/addPackage" element={<AddPackage />}/>
+        <Route path="/packages/updatePackage" element={<UpdatePackage />}/>
 
     </Routes>
  </Router>

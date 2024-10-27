@@ -65,14 +65,14 @@ const App = () => {
               <Routes>
                 {/* Main Routes */}
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/shell/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Login />} />
                 <Route path="/tracking" element={<TrackPackage />} />
 
                 {/* Logged in users accessible routes */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/welcome/*" element={<Welcome />} />
+                <Route path="/shell/dashboard" element={<Dashboard />} />
+                <Route path="/shell/welcome" element={<Welcome />} />
                 <Route path="/reports/globalReport" element={<GlobalReport />} />
                 <Route path="/admin/addBranch" element={<AddBranch />} />
                 <Route path="/admin/addStaff" element={<AddStaff />} />
