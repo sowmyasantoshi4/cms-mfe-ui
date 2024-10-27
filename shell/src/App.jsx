@@ -44,6 +44,9 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.usr)
+
+  // const [portState, setPortState] = useState(false);
+  
 // console.log(userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
@@ -80,7 +83,9 @@ const App = () => {
                 <Route path="/packages/updatePackage" element={<UpdatePackage />} />
 
                 {/* Catch-all route for 404 */}
-                <Route path="*" element={<NotFound />} />
+                {/* {!portState && */}
+                  <Route path="*" element={<NotFound />} />
+                {/* } */}
               </Routes>
             </div>
 
