@@ -15,7 +15,8 @@ services:
       - reports
       - admin
       - packages
-      
+    networks:
+      - my_network
   
 
   login:
@@ -23,55 +24,67 @@ services:
     container_name: login
     # build:
     #   context: ./login
-    # ports:
-    #   - "9002:80"
+    ports:
+      - "9002:80"
+    networks:
+      - my_network
 
   reports:
     image: sowmyasantoshi4/reports:latest
     container_name: reports
     # build:
     #   context: ./reports
-    # ports:
-    #   - "9004:80"
+    ports:
+      - "9004:80"
+    networks:
+      - my_network
 
   packages:
     image: sowmyasantoshi4/packages:latest
     container_name: packages
     # build:
     #   context: ./packages
-    # ports:
-    #   - "9006:80"
+    ports:
+      - "9006:80"
+    networks:
+      - my_network
 
   admin:
     image: sowmyasantoshi4/admin-portal:latest
     container_name: admin
     # build:
     #   context: ./admin-portal
-    # ports:
-    #   - "9005:80"
+    ports:
+      - "9005:80"
+    networks:
+      - my_network
 
   tracking:
     image: sowmyasantoshi4/tracking:latest
     container_name: tracking
     # build:
     #   context: ./tracking
-    # ports:
-    #   - "9003:80"
+    ports:
+      - "9003:80"
+    networks:
+      - my_network
 
   shell:
     image: sowmyasantoshi4/shell:latest
     container_name: shell
     # build:
     #   context: ./shell
-    # ports:
-    #   - "9000:80"
+    ports:
+      - "9000:80"
     depends_on:
       - login
       - reports
       - packages
       - admin
       - tracking
+    networks:
+      - my_network
 
 networks:
-  default:
+  my_network:
     driver: bridge  # This uses the default bridge network
