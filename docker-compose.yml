@@ -7,7 +7,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount your Nginx config
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount your Nginx config
     depends_on:
       - shell
       - login
