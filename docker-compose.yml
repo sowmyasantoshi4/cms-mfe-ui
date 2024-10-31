@@ -1,90 +1,65 @@
-version: '3.8'
-
+version: '3'
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount your Nginx config
-    depends_on:
-      - shell
-      - login
-      - tracking
-      - reports
-      - admin
-      - packages
-    networks:
-      - my_network
-  
-
-  login:
-    image: sowmyasantoshi4/login:latest
-    container_name: login
-    # build:
-    #   context: ./login
-    ports:
-      - "9002:80"
-    networks:
-      - my_network
-
-  reports:
-    image: sowmyasantoshi4/reports:latest
-    container_name: reports
-    # build:
-    #   context: ./reports
-    ports:
-      - "9004:80"
-    networks:
-      - my_network
-
-  packages:
-    image: sowmyasantoshi4/packages:latest
-    container_name: packages
-    # build:
-    #   context: ./packages
-    ports:
-      - "9006:80"
-    networks:
-      - my_network
-
-  admin:
-    image: sowmyasantoshi4/admin-portal:latest
-    container_name: admin
-    # build:
-    #   context: ./admin-portal
-    ports:
-      - "9005:80"
-    networks:
-      - my_network
-
-  tracking:
-    image: sowmyasantoshi4/tracking:latest
-    container_name: tracking
-    # build:
-    #   context: ./tracking
-    ports:
-      - "9003:80"
-    networks:
-      - my_network
-
   shell:
-    image: sowmyasantoshi4/shell:latest
-    container_name: shell
-    # build:
-    #   context: ./shell
+    build:
+      context: ./shell
+      dockerfile: Dockerfile
     ports:
       - "9000:80"
     depends_on:
       - login
-      - reports
-      - packages
-      - admin
       - tracking
+      - reports
+      - admin
+      - packages
     networks:
-      - my_network
+      - mfe-network
+
+  login:
+    build:
+      context: ./login
+      dockerfile: Dockerfile
+    ports:
+      - "9002:80"
+    networks:
+      - mfe-network
+
+  tracking:
+    build:
+      context: ./tracking
+      dockerfile: Dockerfile
+    ports:
+      - "9003:80"
+    networks:
+      - mfe-network
+
+  reports:
+    build:
+      context: ./reports
+      dockerfile: Dockerfile
+    ports:
+      - "9004:80"
+    networks:
+      - mfe-network
+
+  admin:
+    build:
+      context: ./admin-portal
+      dockerfile: Dockerfile
+    ports:
+      - "9005:80"
+    networks:
+      - mfe-network
+
+  packages:
+    build:
+      context: ./packages
+      dockerfile: Dockerfile
+    ports:
+      - "9006:80"
+    networks:
+      - mfe-network
 
 networks:
-  my_network:
-    driver: bridge  # This uses the default bridge network
+  mfe-network:
+    driver: bridge

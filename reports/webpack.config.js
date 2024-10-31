@@ -10,6 +10,8 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = (_, argv) => ({
   output: {
     publicPath: "http://localhost:9004/",
+    // publicPath: "http://localhost:9000/reports/",
+
   },
 
   resolve: {
