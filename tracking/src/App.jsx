@@ -11,7 +11,7 @@ import { store, persistor } from 'shell/store'; // Import both store and persist
 const App = () => (
   <Router>
     <Routes>
-        <Route path="/tracking" element={<TrackPackage />}/>
+        <Route path="/" element={<TrackPackage />}/>
     </Routes>
  </Router>
 );

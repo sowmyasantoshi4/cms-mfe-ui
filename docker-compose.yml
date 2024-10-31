@@ -6,6 +6,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9000:80"
+    depends_on:
+      - login
+      - tracking
+      - reports
+      - admin
+      - packages
     networks:
       - mfe-network
 
@@ -36,7 +42,7 @@ services:
     networks:
       - mfe-network
 
-  admin-portal:
+  admin:
     build:
       context: ./admin-portal
       dockerfile: Dockerfile
