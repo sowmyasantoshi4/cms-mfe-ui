@@ -1,9 +1,7 @@
 version: '3'
 services:
   shell:
-    build:
-      context: ./shell
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/shell:latest
     ports:
       - "9000:80"
     depends_on:
@@ -16,45 +14,35 @@ services:
       - mfe-network
 
   login:
-    build:
-      context: ./login
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/login:latest
     ports:
       - "9002:80"
     networks:
       - mfe-network
 
   tracking:
-    build:
-      context: ./tracking
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/tracking:latest
     ports:
       - "9003:80"
     networks:
       - mfe-network
 
   reports:
-    build:
-      context: ./reports
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/reports:latest
     ports:
       - "9004:80"
     networks:
       - mfe-network
 
   admin:
-    build:
-      context: ./admin-portal
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/admin-portal:latest
     ports:
       - "9005:80"
     networks:
       - mfe-network
 
   packages:
-    build:
-      context: ./packages
-      dockerfile: Dockerfile
+    image: sowmyasantoshi4/packages:latest
     ports:
       - "9006:80"
     networks:
