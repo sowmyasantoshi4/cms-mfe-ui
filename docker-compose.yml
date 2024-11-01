@@ -1,53 +1,50 @@
-version: '3'
+version: '3.8'
+
 services:
   shell:
-    image: sowmyasantoshi4/shell:latest
+    build:
+      context: ./shell
+    expose:
+      - "80"  # Expose port 80
+
+  login:
+    build:
+      context: ./login
+    expose:
+      - "80"  # Expose port 80
+
+  tracking:
+    build:
+      context: ./tracking
+    expose:
+      - "80"  # Expose port 80
+
+  reports:
+    build:
+      context: ./reports
+    expose:
+      - "80"  # Expose port 80
+
+  admin_portal:
+    build:
+      context: ./admin-portal
+    expose:
+      - "80"  # Expose port 80
+
+  packages:
+    build:
+      context: ./packages
+    expose:
+      - "80"  # Expose port 80
+
+  nginx:
+    image: nginx:latest
     ports:
-      - "9000:80"
+      - "80:80"  # Bind Nginx to port 9000 on the host
     depends_on:
+      - shell
       - login
       - tracking
       - reports
-      - admin
+      - admin_portal
       - packages
-    networks:
-      - mfe-network
-
-  login:
-    image: sowmyasantoshi4/login:latest
-    ports:
-      - "9002:80"
-    networks:
-      - mfe-network
-
-  tracking:
-    image: sowmyasantoshi4/tracking:latest
-    ports:
-      - "9003:80"
-    networks:
-      - mfe-network
-
-  reports:
-    image: sowmyasantoshi4/reports:latest
-    ports:
-      - "9004:80"
-    networks:
-      - mfe-network
-
-  admin:
-    image: sowmyasantoshi4/admin-portal:latest
-    ports:
-      - "9005:80"
-    networks:
-      - mfe-network
-
-  packages:
-    image: sowmyasantoshi4/packages:latest
-    ports:
-      - "9006:80"
-    networks:
-      - mfe-network
-
-networks:
-  mfe-network:
-    driver: bridge

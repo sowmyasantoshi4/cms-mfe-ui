@@ -9,9 +9,9 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:9004/",
+    // publicPath: "http://localhost:9004/",
     // publicPath: "http://localhost:9000/reports/",
-
+    publicPath: "/reports/",
   },
 
   resolve: {
@@ -67,7 +67,8 @@ module.exports = (_, argv) => ({
       name: "reports",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        // shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: 'shell@/remoteEntry.js',
       },
       exposes: {
         './GlobalReport' : './src/components/GlobalReport'

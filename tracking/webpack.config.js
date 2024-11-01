@@ -10,7 +10,9 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = (_, argv) => ({
   output: {
     // publicPath: "http://localhost:9003/",
-    publicPath: "http://localhost:9003/",
+    // publicPath: "http://localhost:9003/",
+    publicPath: "/tracking/",
+
   },
 
   resolve: {
@@ -66,7 +68,8 @@ module.exports = (_, argv) => ({
       name: "tracking",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        // shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: 'shell@/remoteEntry.js',
       },
       exposes: {
         './TrackPackage': './src/components/TrackPackage'
