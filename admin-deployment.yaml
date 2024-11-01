@@ -1,0 +1,36 @@
+# admin-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin
+  namespace: mfe-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+        - name: admin
+          image: sowmyasantoshi4/admin-portal:latest
+          ports:
+            - containerPort: 80
+---
+# admin-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-service
+  namespace: mfe-namespace
+spec:
+  type: NodePort
+  selector:
+    app: admin
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30085

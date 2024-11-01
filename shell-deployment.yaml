@@ -1,0 +1,39 @@
+# shell-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell
+  # namespace: mfe-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shell
+  template:
+    metadata:
+      labels:
+        app: shell
+    spec:
+      containers:
+        - name: shell
+          image: sowmyasantoshi4/shell:latest
+          ports:
+            - containerPort: 9000
+---
+# shell-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: shell-service
+  # namespace: mfe-namespace
+spec:
+  type: NodePort
+  selector:
+    app: shell
+  ports:
+    - port: 80          # ClusterIP port, accessible inside the cluster
+      targetPort: 9000   # Pod container port
+  # ports:
+  #   - port: 80
+  #     targetPort: 80
+  #     nodePort: 30000  # Minikube ports are typically in the range 30000-32767

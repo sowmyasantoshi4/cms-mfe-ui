@@ -10,7 +10,8 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = (_, argv) => ({
   output: {
     // publicPath: "http://localhost:9005/admin/",
-    publicPath: "http://localhost:9005/",
+    // publicPath: "http://localhost:9005/",
+    publicPath: process.env.ADMIN_PUBLIC_PATH || 'http://localhost:9005/',
   },
 
   resolve: {
@@ -66,7 +67,7 @@ module.exports = (_, argv) => ({
       name: "admin_portal",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: `shell@${process.env.SHELL_MFE_URL || 'http://localhost:9000'}/remoteEntry.js`, // Make sure this URL is correct
       },
       exposes: {
         './AddBranch': './src/components/branch/AddBranch',

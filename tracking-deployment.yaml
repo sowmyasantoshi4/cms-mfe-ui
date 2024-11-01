@@ -1,0 +1,36 @@
+# tracking-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tracking
+  namespace: mfe-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tracking
+  template:
+    metadata:
+      labels:
+        app: tracking
+    spec:
+      containers:
+        - name: tracking
+          image: sowmyasantoshi4/tracking:latest
+          ports:
+            - containerPort: 80
+---
+# tracking-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tracking-service
+  namespace: mfe-namespace
+spec:
+  type: NodePort
+  selector:
+    app: tracking
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30083

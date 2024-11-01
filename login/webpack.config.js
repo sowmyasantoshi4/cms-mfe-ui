@@ -9,8 +9,9 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:9002/",
+    // publicPath: "http://localhost:9002/",
     // publicPath: "http://localhost:9000/login/",
+    publicPath: process.env.LOGIN_PUBLIC_PATH || 'http://localhost:9002/',
   },
 
   resolve: {
@@ -19,6 +20,10 @@ module.exports = (_, argv) => ({
 
   devServer: {
     port: 9002,
+    open: false,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {
@@ -66,7 +71,7 @@ module.exports = (_, argv) => ({
       name: "login",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: `shell@${process.env.SHELL_MFE_URL || 'http://localhost:9000'}/remoteEntry.js`, // Make sure this URL is correct
       },
       exposes: {
         './Login' : './src/components/Login'

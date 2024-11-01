@@ -1,0 +1,36 @@
+# packages-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: packages
+  namespace: mfe-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: packages
+  template:
+    metadata:
+      labels:
+        app: packages
+    spec:
+      containers:
+        - name: packages
+          image: sowmyasantoshi4/packages:latest
+          ports:
+            - containerPort: 80
+---
+# packages-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: packages-service
+  namespace: mfe-namespace
+spec:
+  type: NodePort
+  selector:
+    app: packages
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30086

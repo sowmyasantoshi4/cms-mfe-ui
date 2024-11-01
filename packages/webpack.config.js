@@ -9,8 +9,9 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:9006/",
+    // publicPath: "http://localhost:9006/",
     // publicPath: "http://localhost:9000/packages/",
+    publicPath: process.env.PACKAGES_PUBLIC_PATH || 'http://localhost:9006/',
   },
 
   resolve: {
@@ -66,7 +67,7 @@ module.exports = (_, argv) => ({
       name: "packages",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: `shell@${process.env.SHELL_MFE_URL || 'http://localhost:9000'}/remoteEntry.js`, // Make sure this URL is correct
       },
       exposes: {
         './AddPackage': './src/components/AddPackage',
