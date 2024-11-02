@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell
+  # namespace: mfe-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shell
+  template:
+    metadata:
+      labels:
+        app: shell
+    spec:
+      containers:
+        - name: shell
+          image: sowmyasantoshi4/shell-mfe:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          env:
+            - name: LOGIN_MFE_URL
+              value: "http://login-service/remoteEntry.js"
+            - name: TRACKING_MFE_URL
+              value: "http://tracking-service/remoteEntry.js"
+            - name: REPORTS_MFE_URL
+              value: "http://reports-service/remoteEntry.js"
+            - name: ADMIN_MFE_URL
+              value: "http://admin-service/remoteEntry.js"
+            - name: PACKAGES_MFE_URL
+              value: "http://packages-service/remoteEntry.js"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shell-loadbalancer
+spec:
+  selector:
+    app: shell
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

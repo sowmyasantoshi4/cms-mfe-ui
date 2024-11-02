@@ -1,4 +1,4 @@
-version: '3'
+version: "3.0"
 services:
   shell:
     build:
@@ -44,7 +44,7 @@ services:
 
   admin:
     build:
-      context: ./admin-portal
+      context: ./admin
       dockerfile: Dockerfile
     ports:
       - "9005:80"

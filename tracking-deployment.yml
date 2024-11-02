@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tracking
+spec:
+  selector:
+    app: tracking
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tracking-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tracking
+  template:
+    metadata:
+      labels:
+        app: tracking
+    spec:
+      containers:
+        - name: tracking-container
+          image: sowmyasantoshi4/login-mfe:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          env:
+            - name: SHELL_MFE_URL
+              value: "http://shell-service/remoteEntry.js"
+      resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-loadbalancer
+spec:
+  selector:
+    app: login
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: packages
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: packages
+  template:
+    metadata:
+      labels:
+        app: packages
+    spec:
+      containers:
+      - name: packages
+        image: sowmyasantoshi4/packages-mfe:latest 
+        ports:
+        - containerPort: 80
+        env:
+            - name: SHELL_MFE_URL
+              value: "http://shell-service/remoteEntry.js"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: packages-service
+spec:
+  selector:
+    app: packages
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

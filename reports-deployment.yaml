@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reports
+  template:
+    metadata:
+      labels:
+        app: reports
+    spec:
+      containers:
+        - name: reports
+          image: sowmyasantoshi4/reports-mfe:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          env:
+            - name: SHELL_MFE_URL
+              value: "http://shell-service/remoteEntry.js"
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+        requests:
+          memory: "256Mi"
+          cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports
+spec:
+  selector:
+    app: reports
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
