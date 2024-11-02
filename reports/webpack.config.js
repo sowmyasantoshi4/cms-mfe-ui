@@ -7,11 +7,30 @@ const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require('./compilation.config.js');
 
-module.exports = (_, argv) => ({
-  output: {
-    publicPath: "http://localhost:9004/",
-    // publicPath: "http://localhost:9000/reports/",
+module.exports = (_, argv) => {
+  // console.log("argv.mode",argv.mode);
+  // default => local | development
+  let _PUBLIC_PATH = "http://localhost:9004/";
 
+  let _SHELL_MFE_URL = "http://localhost:9000/remoteEntry.js";
+  let _LOGIN_MFE_URL = "http://localhost:9002/remoteEntry.js";
+  let _TRACKING_MFE_URL = "http://localhost:9003/remoteEntry.js";
+  let _REPORTS_MFE_URL = "http://localhost:9004/remoteEntry.js"
+  let _ADMIN_MFE_URL = "http://localhost:9005/remoteEntry.js"
+  let _PACKAGES_MFE_URL = "http://localhost:9006/remoteEntry.js";
+
+  // for production
+  if( argv.mode === 'production'){
+    _PUBLIC_PATH = process.env.REPORTS_PUBLIC_PATH || "http://reports-service/";
+    _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://shell-service/remoteEntry.js";
+  }
+
+  // console.log("_LOGIN_MFE_URL",_LOGIN_MFE_URL)
+
+
+  return {
+  output: {
+    publicPath: _PUBLIC_PATH,
   },
 
   resolve: {
@@ -67,7 +86,7 @@ module.exports = (_, argv) => ({
       name: "reports",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: `shell@${_SHELL_MFE_URL}`,
       },
       exposes: {
         './GlobalReport' : './src/components/GlobalReport'
@@ -89,4 +108,5 @@ module.exports = (_, argv) => ({
     }),
     new Dotenv()
   ],
-});
+}
+};

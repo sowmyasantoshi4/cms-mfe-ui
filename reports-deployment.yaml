@@ -17,6 +17,9 @@ spec:
           image: sowmyasantoshi4/reports-mfe:latest
           ports:
             - containerPort: 80
+          env:
+            - name: SHELL_MFE_URL
+              value: "http://shell-service/remoteEntry.js"
           resources:
             limits:
               memory: "512Mi"
@@ -24,21 +27,11 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
-          env:
-            - name: SHELL_MFE_URL
-              value: "http://shell-service/remoteEntry.js"
-      resources:
-        limits:
-          memory: "512Mi"
-          cpu: "500m"
-        requests:
-          memory: "256Mi"
-          cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: reports
+  name: reports-service
 spec:
   selector:
     app: reports
@@ -46,4 +39,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer
+  type: ClusterIP

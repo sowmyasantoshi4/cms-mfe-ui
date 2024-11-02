@@ -7,10 +7,27 @@ const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require('./compilation.config.js');
 
-module.exports = (_, argv) => ({
+module.exports = (_, argv) => {
+  // console.log("argv.mode",argv.mode);
+  // default => local | development
+  let _PUBLIC_PATH = "http://localhost:9006/";
+
+  let _SHELL_MFE_URL = "http://localhost:9000/remoteEntry.js";
+  let _LOGIN_MFE_URL = "http://localhost:9002/remoteEntry.js";
+  let _TRACKING_MFE_URL = "http://localhost:9003/remoteEntry.js";
+  let _REPORTS_MFE_URL = "http://localhost:9004/remoteEntry.js"
+  let _ADMIN_MFE_URL = "http://localhost:9005/remoteEntry.js"
+  let _PACKAGES_MFE_URL = "http://localhost:9006/remoteEntry.js";
+
+  // for production
+  if( argv.mode === 'production'){
+    _PUBLIC_PATH = process.env.PACKAGES_PUBLIC_PATH || "http://packages-service/";
+    _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://shell-service/remoteEntry.js";
+  }
+
+return {
   output: {
-    publicPath: "http://localhost:9006/",
-    // publicPath: "http://localhost:9000/packages/",
+    publicPath: process.env._PUBLIC_PATH,
   },
 
   resolve: {
@@ -66,7 +83,7 @@ module.exports = (_, argv) => ({
       name: "packages",
       filename: "remoteEntry.js",
       remotes: {
-        shell: 'shell@http://localhost:9000/remoteEntry.js', // Make sure this URL is correct
+        shell: `shell@${process.env.REACT_APP_SHELL_MFE_URL}`,
       },
       exposes: {
         './AddPackage': './src/components/AddPackage',
@@ -89,4 +106,5 @@ module.exports = (_, argv) => ({
     }),
     new Dotenv()
   ],
-});
+}
+};
