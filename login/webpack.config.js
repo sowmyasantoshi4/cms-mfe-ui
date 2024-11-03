@@ -20,10 +20,10 @@ module.exports = (_, argv) => {
   let _PACKAGES_MFE_URL = "http://localhost:9006/remoteEntry.js";
 
   // for production
-  if( argv.mode === 'production'){
-    _PUBLIC_PATH = process.env.LOGIN_PUBLIC_PATH || "http://login-service/";
-    _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://shell-service/remoteEntry.js";
-  }
+  // if( argv.mode === 'production'){
+    _PUBLIC_PATH = process.env.LOGIN_PUBLIC_PATH || "http://localhost:8081/";
+    _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://localhost:80/remoteEntry.js";
+  // }
   return {
   output: {
     publicPath: _PUBLIC_PATH,

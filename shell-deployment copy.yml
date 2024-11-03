@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shell
+  name: shell-copy
   # namespace: mfe-namespace
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: shell
+      app: shell-copy
   template:
     metadata:
       labels:
-        app: shell
+        app: shell-copy
     spec:
       containers:
-        - name: shell
-          image: sowmyasantoshi4/shell-mfe:latest
+        - name: shell-copy
+          image: nginx:latest
           ports:
             - containerPort: 80
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: shell-service
+  name: shell-copy-service
   labels: 
-    app: shell
+    app: shell-copy
 spec:
   selector:
-    app: shell
+    app: shell-copy
   ports:
     - protocol: TCP
       port: 80

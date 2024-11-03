@@ -12,7 +12,7 @@ module.exports = (_, argv) => {
   // default => local | development
   let _PUBLIC_PATH = "http://localhost:9000/";
 
-  let _SHELL_MFE_URL = "http://localhost:9000/remoteEntry.js";
+  // let _SHELL_MFE_URL = "http://localhost:9000/remoteEntry.js";
   let _LOGIN_MFE_URL = "http://localhost:9002/remoteEntry.js";
   let _TRACKING_MFE_URL = "http://localhost:9003/remoteEntry.js";
   let _REPORTS_MFE_URL = "http://localhost:9004/remoteEntry.js"
@@ -20,17 +20,17 @@ module.exports = (_, argv) => {
   let _PACKAGES_MFE_URL = "http://localhost:9006/remoteEntry.js";
 
   // for production
-  if( argv.mode === 'production'){
-    _PUBLIC_PATH = process.env.SHELL_PUBLIC_PATH || "http://shell-service/";
+  // if( argv.mode === 'production'){
+    _PUBLIC_PATH = process.env.SHELL_PUBLIC_PATH || "http://localhost:80/";
 
-    _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://shell-service/remoteEntry.js";
-    _LOGIN_MFE_URL = process.env.LOGIN_MFE_URL || "http://login-service/remoteEntry.js";
+    // _SHELL_MFE_URL = process.env.SHELL_MFE_URL || "http://shell-service/remoteEntry.js";
+    _LOGIN_MFE_URL = process.env.LOGIN_MFE_URL || "http://localhost:8081/remoteEntry.js";
     _TRACKING_MFE_URL = process.env.TRACKING_MFE_URL || "http://tracking-service/remoteEntry.js";
     _REPORTS_MFE_URL = process.env.REPORTS_MFE_URL || "http://reports-service/remoteEntry.js";
     _ADMIN_MFE_URL = process.env.ADMIN_MFE_URL || "http://admin-service/remoteEntry.js";
     _PACKAGES_MFE_URL = process.env.PACKAGES_MFE_URL || "http://packages-service/remoteEntry.js";
 
-  }
+  // }
 
   // console.log("_PUBLIC_PATH",_PUBLIC_PATH)
 

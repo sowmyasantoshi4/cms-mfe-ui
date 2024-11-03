@@ -32,6 +32,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-service
+  labels: 
+    app: reports
 spec:
   selector:
     app: reports
