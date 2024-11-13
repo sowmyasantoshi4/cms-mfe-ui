@@ -341,7 +341,11 @@ const GlobalReport = () => {
                         onChange={handleInputChange}
                         // options={stList}
                       >
+                        <option value={0}>
+                            -ALL-
+                        </option>
                       {stList.map((option, index) => (
+                        
                           <option key={index} value={option.value}>
                               {option.label}
                           </option>

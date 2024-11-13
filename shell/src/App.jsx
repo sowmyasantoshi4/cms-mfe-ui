@@ -57,12 +57,16 @@ const isTokenExpired = () => {
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.usr)
+  const userProfile = useSelector((state) => state.auth.user)
+
+  // let userProfile = JSON.parse(localStorage.getItem("userProfile"));
 
   
-// console.log(userProfile)
+console.log("up in app.jsx",userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
+      localStorage.removeItem('expiryTime');
+      localStorage.removeItem('userProfile');
       dispatch(logout());
       // window.location.href = '/login';  // Redirect to login page
     }
@@ -82,18 +86,22 @@ const App = () => {
                 {/* Main Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/shell/home" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/logout" element={<Login />} />
+                <Route path="/login" element={userProfile?.valid === true ? <Welcome /> : <Login />} />
                 <Route path="/tracking" element={<TrackPackage />} />
 
                 {/* Logged in users accessible routes */}
-                <Route path="/shell/dashboard" element={<Dashboard />} />
-                <Route path="/shell/welcome" element={<Welcome />} />
-                <Route path="/reports/globalReport" element={<GlobalReport />} />
-                <Route path="/admin/addBranch" element={<AddBranch />} />
-                <Route path="/admin/addStaff" element={<AddStaff />} />
-                <Route path="/packages/addPackage" element={<AddPackage />} />
-                <Route path="/packages/updatePackage" element={<UpdatePackage />} />
+                {/* { userProfile?.valid === true &&  */}
+                  <>
+                    <Route path="/logout" element={<Login />} />
+                    <Route path="/shell/dashboard" element={userProfile?.valid === true ? <Dashboard /> : <Login />} />
+                    <Route path="/shell/welcome" element={userProfile?.valid === true ? <Welcome /> : <Login />} />
+                    <Route path="/reports/globalReport" element={userProfile?.valid === true ? <GlobalReport /> : <Login />} />
+                    <Route path="/admin/addBranch" element={userProfile?.valid === true ? <AddBranch /> : <Login />} />
+                    <Route path="/admin/addStaff" element={userProfile?.valid === true ? <AddStaff /> : <Login />} />
+                    <Route path="/packages/addPackage" element={userProfile?.valid === true ? <AddPackage /> : <Login />} />
+                    <Route path="/packages/updatePackage" element={userProfile?.valid === true ? <UpdatePackage /> : <Login />} />
+                  </>
+                {/* } */}
 
                 {/* Catch-all route for 404 */}
                 {/* {!portState && */}

@@ -20,7 +20,7 @@ const UpdatePackage = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   const userProfile = useSelector((state) => state.usr)
-  let isPublicView = userProfile && userProfile.isValid ? false : true;
+  let isPublicView = userProfile && userProfile.valid ? false : true;
 
   const handleInputChange = (e) => {
     let val = e.target.value;

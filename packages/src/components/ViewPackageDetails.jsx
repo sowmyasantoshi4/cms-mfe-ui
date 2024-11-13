@@ -15,7 +15,7 @@ const ViewPackageDetails = (props) => {
     const [loading, setLoading] = useState(false);
     let isPublicView = props.publicView || false;
 
-    const userProfile = useSelector((state) => state.user)
+    const userProfile = useSelector((state) => state.auth.user)
     // let user_branch_id = userProfile.branch_id;
 
     let _headerVis = props.headerVisibility;

@@ -83,8 +83,10 @@ const Login = () => {
              //console.log("userProfile",response)
               // if(response.valid ){
                 // dispatch(login(response));
+                console.log("dispatching for login...")
                 dispatch(login(response)); // Use the actions from authSlice
                 navigate("/shell/dashboard");
+                // location.href = "/shell/dashboard";
               // }else{
               //   setErrors({lusername: 'This Username is INACTIVE'});
               // }
