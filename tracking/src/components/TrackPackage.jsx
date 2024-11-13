@@ -21,8 +21,9 @@ const TrackPackage = () => {
   const [errorCss, setErrorsCss] = useState('');
   const [showDetails, setShowDetails] = useState(false);
 
-  const userProfile = useSelector((state) => state.user);
-  let isPublicView = userProfile && userProfile.isValid ? false : true;
+  const userProfile = useSelector((state) => state.auth.user)
+
+  let isPublicView = userProfile && userProfile.valid ? false : true;
 
   const handleInputChange = (e) => {
     let val = e.target.value;

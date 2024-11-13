@@ -57,11 +57,12 @@ const isTokenExpired = () => {
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  // const userProfile = useSelector((state) => state.usr)
-  let userProfile = JSON.parse(localStorage.getItem("userProfile"));
+  const userProfile = useSelector((state) => state.auth.user)
+
+  // let userProfile = JSON.parse(localStorage.getItem("userProfile"));
 
   
-// console.log("up in app.jsx",userProfile)
+console.log("up in app.jsx",userProfile)
   useEffect(() => {
     if (isTokenExpired()) {
       localStorage.removeItem('expiryTime');

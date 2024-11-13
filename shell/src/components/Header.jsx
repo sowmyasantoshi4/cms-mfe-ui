@@ -14,10 +14,15 @@ const Header = () => {
 
   const { isAuthenticated, user } = useSelector((state) => state.auth);  // Access auth state from store
 
+
+  const rState = useSelector((state) => state.auth);  // Access auth state from store
+
+  console.log("rstate",rState)
   const dispatch = useDispatch();
   const doLogout = () => {
     localStorage.removeItem('expiryTime');
     localStorage.removeItem('userProfile');
+    console.log("logout clicked...")
     dispatch(logout());  // Dispatch the logout action
     // navigate('/login');
   }
