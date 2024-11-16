@@ -69,28 +69,19 @@ const Login = () => {
       
       setTimeout(() => {
       
-        doLogin(lusername, lpassword)
+        doLogin(lusername, lpassword) // API Call
         .then(response => {
-          console.log("login PAGE GOT THE resp="+JSON.stringify(response))
+          // console.log("login PAGE GOT THE resp="+JSON.stringify(response))
           if (response instanceof Error) {
             setFormEErrors('ERROR_AT_LOGIN');
           } else {
             if (!response.valid) {
               setFormEErrors('INVALID_CRED');
-            } else {
+            } else { // success login
               clearForm();
-
-             //console.log("userProfile",response)
-              // if(response.valid ){
-                // dispatch(login(response));
-                console.log("dispatching for login...")
-                dispatch(login(response)); // Use the actions from authSlice
-                navigate("/shell/dashboard");
-                // location.href = "/shell/dashboard";
-              // }else{
-              //   setErrors({lusername: 'This Username is INACTIVE'});
-              // }
-    
+              console.log("dispatching for login...")
+              dispatch(login(response)); // update redux-state for user login
+              navigate("/shell/dashboard");
             }
           }
         })

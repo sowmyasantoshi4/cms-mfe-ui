@@ -73,19 +73,11 @@ module.exports = (_, argv) => ({
       name: "shell",
       filename: "remoteEntry.js",
       remotes: {
-        // sharedMFE : 'shared@http://localhost:9001/remoteEntry.js',
         loginMFE : 'login@http://localhost:9002/remoteEntry.js',
         trackingMFE : 'tracking@http://localhost:9003/remoteEntry.js',
         reportsMFE : 'reports@http://localhost:9004/remoteEntry.js',
         adminMFE : 'admin_portal@http://localhost:9005/remoteEntry.js',
         packagesMFE : 'packages@http://localhost:9006/remoteEntry.js',
-
-        // loginMFE: "login@http://localhost:9000/login/remoteEntry.js",
-        // trackingMFE: "tracking@http://localhost:9000/tracking/remoteEntry.js",
-        // reportsMFE: "reports@http://localhost:9000/reports/remoteEntry.js",
-        // adminMFE: "admin_portal@http://localhost:9000/admin/remoteEntry.js",
-        // packagesMFE: "packages@http://localhost:9000/packages/remoteEntry.js",
-
       },
       exposes: {
         // Share the global state provider 

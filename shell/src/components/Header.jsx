@@ -1,8 +1,6 @@
 // MFE 1: Accessing the global state from context
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../globalState/authSlice';
-import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -10,14 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faCirclePlus, faEdit, faList, faListNumeric, faKey, faPersonCirclePlus, faPlusCircle, faPowerOff, faTruck, faUserShield, faChartBar, faBoxOpen, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { isAuthenticated, user } = useSelector((state) => state.auth);  // Access auth state from store
+  const { isAuthenticated, user } = useSelector((state) => state.auth);  // Access user login auth state from store
 
-
-  const rState = useSelector((state) => state.auth);  // Access auth state from store
-
-  console.log("rstate",rState)
   const dispatch = useDispatch();
   const doLogout = () => {
     localStorage.removeItem('expiryTime');
